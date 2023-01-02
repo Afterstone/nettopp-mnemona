@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:13.2
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=flashcards
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - AUTH_SERVER_ENDPOINT=http://localhost:8001
+      - FLASHCARD_DB_CONNECTION_STRING=postgresql://postgres:postgres@postgres:5432/flashcards
+      - HOST=0.0.0.0
+      - PORT=8000
+      - VERBOSE=False
