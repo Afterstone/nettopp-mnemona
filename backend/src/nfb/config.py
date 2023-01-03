@@ -31,6 +31,7 @@ def _parse_bool(
 
 
 # Application config
+UVICORN_RELOAD: bool = _parse_bool(_get_envvar("UVICORN_RELOAD", default="false"))
 VERBOSE: bool = _parse_bool(_get_envvar("VERBOSE", default="false"))
 
 # Database

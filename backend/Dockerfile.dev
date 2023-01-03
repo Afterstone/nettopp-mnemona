@@ -23,6 +23,7 @@ COPY src/ .
 RUN pip install --no-cache-dir .
 
 ENV VERBOSE=False
+ENV UVICORN_RELOAD=False
 
 # Database
 ENV AUTH_SERVER_ENDPOINT="http://localhost:8001"

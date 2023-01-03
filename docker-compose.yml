@@ -11,7 +11,7 @@ services:
   backend:
     build:
       context: ./backend/
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
       - "8000:8000"
     environment:
@@ -19,7 +19,10 @@ services:
       - FLASHCARD_DB_CONNECTION_STRING=postgresql://postgres:postgres@postgres:5432/flashcards
       - HOST=0.0.0.0
       - PORT=8000
+      - UVICORN_RELOAD=True
       - VERBOSE=False
+    volumes:
+      - ./backend/src/:/app/src/
     depends_on:
       - postgres
   frontend:
