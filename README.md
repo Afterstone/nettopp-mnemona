@@ -1,4 +1,4 @@
-# Nettopp Flashcards
+# Nettopp Mnemona
 
 NB: This project is still in early development.
 

@@ -27,7 +27,7 @@ ENV UVICORN_RELOAD=False
 
 # Database
 ENV AUTH_SERVER_ENDPOINT="http://localhost:8001"
-ENV FLASHCARD_DB_CONNECTION_STRINg="sqlite:///flashcards.db"
+ENV MNEMONA_DB_CONNECTION_STRING="sqlite:///mnemona.db"
 
 # Server
 ENV HOST="0.0.0.0"

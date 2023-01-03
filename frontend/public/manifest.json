@@ -1,6 +1,6 @@
 {
-  "short_name": "Nettopp Flashcards",
-  "name": "A flashcard app",
+  "short_name": "Nettopp Mnemona",
+  "name": "A learning system",
   "icons": [],
   "start_url": ".",
   "display": "standalone",

@@ -36,7 +36,7 @@ VERBOSE: bool = _parse_bool(_get_envvar("VERBOSE", default="false"))
 
 # Database
 AUTH_SERVER_ENDPOINT: str = _get_envvar("AUTH_SERVER_ENDPOINT")
-FLASHCARD_DB_CONNECTION_STRING: str = _get_envvar("FLASHCARD_DB_CONNECTION_STRING")
+MNEMONA_DB_CONNECTION_STRING: str = _get_envvar("MNEMONA_DB_CONNECTION_STRING")
 
 # Server
 HOST: str = _get_envvar("HOST", "0.0.0.0")  # nosec B104
