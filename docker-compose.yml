@@ -35,3 +35,5 @@ services:
       - backend
     environment:
       - PORT=3000
+    volumes:
+      - ./frontend/src/:/app/src/
