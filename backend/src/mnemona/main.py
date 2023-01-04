@@ -28,7 +28,7 @@ async def login(email: str = Form(...), password: str = Form(...)):
 
 if __name__ == '__main__':
     uvicorn.run(
-        "nfb.main:app",  # type: ignore
+        "mnemona.main:app",  # type: ignore
         host=HOST,
         port=PORT,
         reload=UVICORN_RELOAD
