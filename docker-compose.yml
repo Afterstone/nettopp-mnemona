@@ -14,13 +14,8 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "8000:8000"
-    environment:
-      - AUTH_SERVER_ENDPOINT=http://localhost:8001
-      - MNEMONA_DB_CONNECTION_STRING=postgresql://postgres:postgres@postgres:5432/mnemona
-      - HOST=0.0.0.0
-      - PORT=8000
-      - UVICORN_RELOAD=True
-      - VERBOSE=False
+    env_file:
+      - ./backend/.env
     volumes:
       - ./backend/src/:/app/src/
     depends_on:

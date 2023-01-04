@@ -11,6 +11,7 @@ classifiers = [ "Private :: Do Not Upload" ]
 dependencies = [
     "alembic[tz]                ~= 1.9.1",
     "fastapi                    ~= 0.77.0",
+    "httpx                      ~= 0.23.2",
     "psycopg2-binary            ~= 2.9.5",
     "python-dotenv              ~= 0.21.0",
     "python-multipart           ~= 0.0.5",
