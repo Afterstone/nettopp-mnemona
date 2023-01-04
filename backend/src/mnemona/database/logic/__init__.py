@@ -1,11 +1,10 @@
 
 
-import datetime as dt
-
-from psycopg2.errors import UniqueViolation
-from pydantic import EmailStr
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm.session import Session
+# import datetime as dt
+# from psycopg2.errors import UniqueViolation
+# from pydantic import EmailStr
+# from sqlalchemy.exc import IntegrityError
+# from sqlalchemy.orm.session import Session
 
 
 class SqlError(Exception):
