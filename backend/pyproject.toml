@@ -52,7 +52,7 @@ testpaths = [
 ]
 
 [tool.flit.module]
-name = "nfb"
+name = "mnemona"
 
 [tool.bandit]
 exclude_dirs = ["tests"]

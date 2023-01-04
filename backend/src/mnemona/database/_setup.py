@@ -1,10 +1,9 @@
 import typing as t
 
+from mnemona.config import MNEMONA_DB_CONNECTION_STRING, VERBOSE
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-
-from nfb.config import MNEMONA_DB_CONNECTION_STRING, VERBOSE
 
 ENGINE = create_engine(MNEMONA_DB_CONNECTION_STRING, echo=VERBOSE)
 
