@@ -1,7 +1,8 @@
 # Set up a quick FastAPI test app.
 import httpx
 import uvicorn
-from fastapi import Depends, FastAPI, Form, Response
+from fastapi import Depends, FastAPI, Response
+from pydantic import BaseModel
 
 from .config import AUTH_SERVER_ENDPOINT, HOST, PORT, UVICORN_RELOAD
 from .database import Session, get_db
@@ -14,8 +15,15 @@ async def root(db: Session = Depends(get_db)):
     return {"message": "Hello World"}
 
 
+class UserLoginDetails(BaseModel):
+    email: str
+    password: str
+
+
 @app.post("/login")
-async def login(email: str = Form(...), password: str = Form(...)):
+async def login(user_data: UserLoginDetails):
+    email = user_data.email
+    password = user_data.password
     url = f"{AUTH_SERVER_ENDPOINT}/api/v1/login"
 
     async with httpx.AsyncClient() as client:
