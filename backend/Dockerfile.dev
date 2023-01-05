@@ -6,9 +6,9 @@ RUN \
     adduser --disabled-login nopriv \
     && chown -R nopriv /app \
     # Make flit install packages only, to cache package installation.
-    && mkdir -p /app/src/nfb/
+    && mkdir -p /app/src/mnemona/
 
-COPY src/nfb/__init__.py src/nfb/__init__.py
+COPY src/mnemona/__init__.py src/mnemona/__init__.py
 COPY \
     pyproject.toml \
     setup.cfg \
@@ -36,5 +36,5 @@ ENV PORT=8000
 USER nopriv
 CMD [ \
     "bash", "-c", \
-    "python -m nfb.main" \
+    "python -m mnemona.main" \
 ]
