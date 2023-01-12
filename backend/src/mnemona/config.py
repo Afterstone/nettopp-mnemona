@@ -41,3 +41,4 @@ MNEMONA_DB_CONNECTION_STRING: str = _get_envvar("MNEMONA_DB_CONNECTION_STRING")
 # Server
 HOST: str = _get_envvar("HOST", "0.0.0.0")  # nosec B104
 PORT: int = int(_get_envvar("PORT", "8000"))
+CORS_ORIGINS: list[str] = _get_envvar("CORS_ORIGINS", None).split(";")
