@@ -4,10 +4,10 @@ import json
 import httpx
 import uvicorn
 from fastapi import Depends, FastAPI, Request, Response
-from starlette.exceptions import HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
+from starlette.exceptions import HTTPException
 from starlette.staticfiles import StaticFiles
 
 from .config import (AUTH_SERVER_ENDPOINT, CORS_ORIGINS, HOST, PORT,
