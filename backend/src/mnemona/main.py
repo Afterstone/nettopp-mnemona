@@ -1,38 +1,94 @@
 # Set up a quick FastAPI test app.
+import json
+
 import httpx
 import uvicorn
-from fastapi import Depends, FastAPI, Response
+from fastapi import Depends, FastAPI, Request, Response
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import OAuth2PasswordBearer
 from pydantic import BaseModel
+from starlette.responses import RedirectResponse
+from starlette.staticfiles import StaticFiles
 
-from .config import AUTH_SERVER_ENDPOINT, HOST, PORT, UVICORN_RELOAD
-from .database import Session, get_db
+from .config import (AUTH_SERVER_ENDPOINT, CORS_ORIGINS, HOST, PORT,
+                     UVICORN_RELOAD)
+
+# from .database import Session, get_db
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/login")
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 @app.get("/")
-async def root(db: Session = Depends(get_db)):
-    return {"message": "Hello World"}
+async def index():
+    return RedirectResponse(url='/index.html')
 
 
-class UserLoginDetails(BaseModel):
+class LoginDetails(BaseModel):
     email: str
     password: str
 
 
-@app.post("/login")
-async def login(user_data: UserLoginDetails):
+class RefreshDetails(BaseModel):
+    refresh_token: str
+
+
+@app.post("/api/v1/login")
+async def login(request: Request):
+    user_data = LoginDetails(**(await request.json()))
     email = user_data.email
     password = user_data.password
     url = f"{AUTH_SERVER_ENDPOINT}/api/v1/login"
 
     async with httpx.AsyncClient() as client:
-        response = await client.post(url, data={"email": email, "password": password})
+        response = await client.post(
+            url,
+            headers={"Content-Type": "application/json"},
+            content=json.dumps({"email": email, "password": password}),
+        )
 
         if not response.status_code == 200:
             return Response(status_code=response.status_code, content=response.text)
 
         return response.json()
+
+
+@app.post("/api/v1/refresh")
+async def refresh(request: Request, token: str = Depends(oauth2_scheme)):
+    url = f"{AUTH_SERVER_ENDPOINT}/api/v1/refresh"
+
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, headers={"Authorization": f"Bearer {token}"})
+
+        if not response.status_code == 200:
+            return Response(status_code=response.status_code, content=response.text)
+
+        return response.json()
+
+
+@app.get("/api/v1/auth-warmup")
+async def health():
+    url = f"{AUTH_SERVER_ENDPOINT}/api/v1/health"
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url)
+
+        if not response.status_code == 200:
+            return Response(status_code=response.status_code, content=response.text)
+
+        return Response(content=response.text)
+
+app.mount('/', StaticFiles(directory='./dist'), name='ui')
+
 
 if __name__ == '__main__':
     uvicorn.run(
