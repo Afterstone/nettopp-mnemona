@@ -16,7 +16,6 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - COCKROACHDB_CLUSTER_ID=4383e28e-7321-4305-b591-aa4b614d00fe
         - VITE_APP_API_URL=/api/v1
         - VITE_APP_AUTH_JWT_PUBLIC_KEY=-----BEGIN PUBLIC KEY-----\nMIGbMBAGByqGSM49AgEGBSuBBAAjA4GGAAQAt4/hLV/lwD5GegafDTYK89L3O2vo\nObHGZiPLNSBCEtcU5Wb7gvWrtOYbB91W4cJdhjimsgFBkMgt32yLjv6e9JsAQ9Ip\nPhsxIXENHNTDeEdKEMuGOmZ+cD+thmKf+xtJNLXPxUrVpi/YYRvtide26LxvoNX8\npBAGbPpcH9vg27347uc=\n-----END PUBLIC KEY-----
     ports:
