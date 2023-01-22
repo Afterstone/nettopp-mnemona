@@ -25,29 +25,3 @@ services:
     #   - postgres
     env_file:
       - ./backend/.env
-    
-    
-  # backend:
-  #   build:
-  #     context: ./backend/
-  #     dockerfile: Dockerfile.dev
-  #   ports:
-  #     - "8000:8000"
-  #   env_file:
-  #     - ./backend/.env
-  #   volumes:
-  #     - ./backend/src/:/app/src/
-  #   depends_on:
-  #     - postgres
-  # frontend:
-  #   build:
-  #     context: ./frontend/
-  #     dockerfile: Dockerfile.dev
-  #   ports:
-  #     - "3000:3000"
-  #   depends_on:
-  #     - backend
-  #   environment:
-  #     - PORT=3000
-  #   volumes:
-  #     - ./frontend/src/:/app/src/

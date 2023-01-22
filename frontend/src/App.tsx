@@ -32,12 +32,7 @@ function ErrorBoundary() {
 
 const router = createBrowserRouter(
   createRoutesFromElements([
-    <Route path="/" loader={
-      async () => {
-        return redirect("/index.html");
-      }
-    } />,
-    <Route path="/index.html" element={<Login />} errorElement={<ErrorBoundary />}>
+    <Route path="/" element={<Login />} errorElement={<ErrorBoundary />}>
       <Route path="login" element={<Login />} errorElement={<ErrorBoundary />} />
     </Route>
   ])

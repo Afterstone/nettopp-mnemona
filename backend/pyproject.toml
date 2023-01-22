@@ -56,3 +56,6 @@ name = "mnemona"
 
 [tool.bandit]
 exclude_dirs = ["tests"]
+
+[tool.isort]
+src_paths = ["src", "tests"]
