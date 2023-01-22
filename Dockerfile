@@ -24,20 +24,6 @@ RUN \
     # Make flit install packages only, to cache package installation.
     && mkdir -p /app/src/mnemona/
 
-ARG COCKROACHDB_CLUSTER_ID
-RUN \
-    apt-get update -y \
-    && apt-get install -y --no-install-recommends \
-        curl \
-    && curl \
-        --create-dirs \
-        -o /home/nopriv/.postgresql/root.crt \
-        "https://cockroachlabs.cloud/clusters/${COCKROACHDB_CLUSTER_ID}/cert" \
-    && chown nopriv:nopriv -R /home/nopriv/.postgresql/ \
-    && apt-get remove -y curl \
-    && rm -rf /var/lib/apt/lists/*
-
-
 COPY ./backend/src/mnemona/__init__.py src/mnemona/__init__.py
 COPY \
     ./backend/pyproject.toml \

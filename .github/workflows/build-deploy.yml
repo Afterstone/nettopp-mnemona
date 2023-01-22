@@ -69,7 +69,6 @@ jobs:
     - name: Build container
       run: |
         docker build \
-          --build-arg COCKROACHDB_CLUSTER_ID="${{ secrets.COCKROACHDB_CLUSTER_ID }}" \
           --build-arg VITE_APP_AUTH_JWT_PUBLIC_KEY="${{ secrets.AUTH_JWT_PUBLIC_KEY }}" \
           -t ${{ env.ARTIFACT_REPO }} \
           -f Dockerfile .
