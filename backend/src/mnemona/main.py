@@ -1,5 +1,6 @@
 # Set up a quick FastAPI test app.
 import json
+from pathlib import Path
 
 import httpx
 import uvicorn
@@ -95,7 +96,8 @@ class SPAStaticFiles(StaticFiles):
             raise ex
 
 
-app.mount("/", SPAStaticFiles(directory="dist", html=True), name="app")
+if Path("dist").exists():
+    app.mount("/", SPAStaticFiles(directory="dist", html=True), name="app")
 
 if __name__ == '__main__':
     uvicorn.run(
