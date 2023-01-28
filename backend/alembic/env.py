@@ -2,10 +2,9 @@ from logging.config import fileConfig
 
 from alembic import context
 from dotenv import load_dotenv
-from sqlalchemy import engine_from_config, pool
-
 from mnemona.config import MNEMONA_DB_CONNECTION_STRING
 from mnemona.database import models
+from sqlalchemy import engine_from_config, pool
 
 load_dotenv()
 
@@ -23,6 +22,7 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 target_metadata = models.Base.metadata
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
@@ -61,11 +61,12 @@ def run_migrations_online() -> None:
     and associate a connection with the context.
 
     """
+
     connectable = engine_from_config(
         config.get_section(config.config_ini_section),  # type: ignore
+        url=MNEMONA_DB_CONNECTION_STRING,
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
-        url=MNEMONA_DB_CONNECTION_STRING
     )
 
     with connectable.connect() as connection:
